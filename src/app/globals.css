@@ -1,26 +1,132 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light storefront — dark chrome only on header */
+  --paper: #f6f5f2;
+  --paper-deep: #ebe9e4;
+  --white: #ffffff;
+  --ink: #12141a;
+  --ink-soft: #3d424c;
+  --muted: #6b7280;
+  --line: rgba(18, 20, 26, 0.1);
+  --header: #0c0d10;
+  --header-soft: #1a1c22;
+  --accent: #e11d2e;
+  --accent-dark: #b91422;
+  --volt: #c8f542;
+  --danger: #dc2626;
+  --success: #15803d;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-white: var(--white);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-header: var(--header);
+  --color-header-soft: var(--header-soft);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-volt: var(--accent);
+  --color-volt-dim: var(--accent-dark);
+  /* Legacy dark tokens → light storefront */
+  --color-void: var(--white);
+  --color-surface: var(--white);
+  --color-surface-raised: var(--paper-deep);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --font-display: var(--font-bebas);
+  --font-sans: var(--font-manrope);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-manrope), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-bebas), Impact, sans-serif;
+  letter-spacing: 0.04em;
+}
+
+/* Clip-path accents */
+.clip-hero-slash {
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+}
+
+.clip-diagonal {
+  clip-path: polygon(0 8%, 100% 0, 100% 92%, 0 100%);
+}
+
+.clip-banner {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 86%);
+}
+
+.clip-card-corner {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+}
+
+.clip-cta {
+  clip-path: polygon(0 0, 100% 0, 96% 100%, 4% 100%);
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+.hero-kenburns {
+  animation: kenburns 12s ease-out forwards;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-kenburns,
+  .marquee-track {
+    animation: none;
+  }
+}
+
+.admin-input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  padding: 0.7rem 0.85rem;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.admin-input:focus {
+  border-color: var(--accent);
+}
+
+.admin-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
